@@ -1,0 +1,99 @@
+---
+title: "Simple but neat document"
+author: Ravi Brenner
+date: 2024-09-10
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: hide
+---
+
+```{r, echo = FALSE, message = FALSE}
+library(tidyverse)
+```
+
+Loaded packages (e.g. `tidyverse`)
+
+I'm an R Markdown document! 
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+```{r}
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r mean(samp)`.
+
+# Learning assessment
+
+Learning assessment: Write a named code chunk that creates a dataframe comprised of: a numeric variable containing a random sample of size 500 from a normal variable with mean 1; a logical vector indicating whether each sampled value is greater than zero; and a numeric vector containing the absolute value of each element. Then, produce a histogram of the absolute value variable just created. Add an inline summary giving the median value rounded to two decimal places. What happens if you set eval = FALSE to the code chunk? What about echo = FALSE?
+
+Here is the code, creates `my_df` and then plots a histogram
+
+```{r histogram, message=FALSE}
+# can create variable and immediately use it with the tibble function (if they're in order)
+# with base R dataframe function, you can't do this
+my_df <- tibble(
+  num_var = rnorm(500, mean = 1),
+  log_var = if_else(num_var > 0, TRUE, FALSE),
+  num_var_abs = abs(num_var)
+)
+
+ggplot(my_df,aes(x = num_var_abs)) +
+  geom_histogram()
+```
+
+The median value is `r round(median(my_df$num_var_abs),2)`
+
+# Formatting text
+
+Text formatting 
+------------------------------------------------------------
+
+*italic*  or  _italic_
+**bold**  or  __bold__
+`code`
+superscript^2^ and subscript~2~
+
+
+Headings
+------------------------------------------------------------
+
+# 1st Level Header
+
+## 2nd Level Header
+
+### 3rd Level Header
+
+
+Lists
+------------------------------------------------------------
+
+*   Bulleted list item 1
+
+*   Item 2
+
+    * Item 2a
+
+    * Item 2b
+
+1.  Numbered list item 1
+
+1.  Item 2. The numbers are incremented automatically in the output.
+
+
+Tables 
+------------------------------------------------------------
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
