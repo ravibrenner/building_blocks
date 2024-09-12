@@ -3,10 +3,7 @@ title: "Simple but neat document"
 author: Ravi Brenner
 date: 2024-09-10
 output: 
-  html_document:
-    toc: true
-    toc_float: true
-    code_folding: hide
+  github_document
 ---
 
 ```{r, echo = FALSE, message = FALSE}
